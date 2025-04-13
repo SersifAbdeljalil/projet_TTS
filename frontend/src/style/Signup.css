@@ -1,0 +1,267 @@
+/* frontend/src/components/Signup.css */
+
+.auth-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+  }
+  
+  .auth-container {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease-out;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .auth-header h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  
+  .auth-header p {
+    color: #7f8c8d;
+    font-size: 0.95rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #34495e;
+    font-size: 0.9rem;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: #27ae60;
+    box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2);
+  }
+  
+  .form-footer {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+  }
+  
+  .form-footer a {
+    color: #27ae60;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .form-footer a:hover {
+    text-decoration: underline;
+  }
+  
+  .buttons-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .btn {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .btn-primary {
+    flex: 3;
+    background-color: #27ae60;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #219955;
+  }
+  
+  .btn-secondary {
+    flex: 1;
+    background-color: #ecf0f1;
+    color: #7f8c8d;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #bdc3c7;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .close-button:hover {
+    color: #7f8c8d;
+  }
+  
+  .input-icon-wrapper {
+    position: relative;
+  }
+  
+  .input-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0.8rem;
+    color: #95a5a6;
+  }
+  
+  .input-with-icon {
+    padding-left: 2.5rem;
+  }
+  
+  .remember-me {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .remember-me input {
+    margin-right: 0.5rem;
+  }
+  
+  .remember-me label {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+  }
+  
+  .remember-me a {
+    color: #27ae60;
+    text-decoration: none;
+  }
+  
+  .remember-me a:hover {
+    text-decoration: underline;
+  }
+  
+  .social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .social-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    transition: all 0.2s;
+  }
+  
+  .social-button:hover {
+    background-color: #e9ecef;
+  }
+  
+  .auth-divider {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+  }
+  
+  .auth-divider::before,
+  .auth-divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .auth-divider span {
+    padding: 0 1rem;
+    color: #95a5a6;
+    font-size: 0.85rem;
+  }
+  
+  .password-rules {
+    font-size: 0.8rem;
+    color: #95a5a6;
+    margin-top: 0.5rem;
+  }
+  
+  .password-strength {
+    height: 5px;
+    background-color: #ecf0f1;
+    border-radius: 2px;
+    margin-top: 0.5rem;
+  }
+  
+  .password-strength-bar {
+    height: 100%;
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.3s, background-color 0.3s;
+  }
+  
+  .strength-weak {
+    width: 33%;
+    background-color: #e74c3c;
+  }
+  
+  .strength-medium {
+    width: 66%;
+    background-color: #f39c12;
+  }
+  
+  .strength-strong {
+    width: 100%;
+    background-color: #27ae60;
+  }
