@@ -221,3 +221,12 @@
     color: #95a5a6;
     font-size: 0.85rem;
   }
+  .social-button {
+    cursor: pointer;
+    pointer-events: auto !important;
+  }
+  
+  .social-button:disabled {
+    pointer-events: none;
+    opacity: 0.7;
+  }

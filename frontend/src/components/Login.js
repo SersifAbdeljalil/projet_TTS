@@ -1,4 +1,3 @@
-// frontend/src/components/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/Login.css'; 
@@ -39,7 +38,23 @@ function Login({ onClose, onSwitchToSignup }) {
       alert('Erreur lors de la connexion');
     }
   };
-  
+
+  const handleGoogleLogin = () => {
+    console.log("Google login clicked"); // Debug log
+    window.location.assign('http://localhost:5000/api/auth/google');
+    
+    // Alternative plus robuste :
+    // window.open(
+    //   'http://localhost:5000/api/auth/google',
+    //   '_blank',
+    //   'noopener,noreferrer'
+    // );
+  };
+
+  const handleFacebookLogin = () => {
+    window.location.href = 'http://localhost:5000/api/auth/facebook';
+  };
+
   const handleSwitchToSignup = (e) => {
     e.preventDefault();
     if (onSwitchToSignup) {
@@ -63,20 +78,19 @@ function Login({ onClose, onSwitchToSignup }) {
         <button className="close-button" onClick={handleClose}>
           <FaTimes />
         </button>
-        
         <div className="auth-header">
           <h2>Connexion</h2>
           <p>Bienvenue ! Veuillez vous connecter pour continuer</p>
         </div>
-        
+
         <div className="social-buttons">
-          <button className="social-button">
+          <button className="social-button" onClick={handleGoogleLogin} type="button">
             <FaGoogle />
           </button>
-          <button className="social-button">
+          <button className="social-button" onClick={handleFacebookLogin} type="button">
             <FaFacebook />
           </button>
-          <button className="social-button">
+          <button className="social-button" type="button">
             <FaTwitter />
           </button>
         </div>

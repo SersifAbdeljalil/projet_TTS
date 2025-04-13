@@ -4,63 +4,64 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import Dashboard from './components/Dashboard'; // You'll need to create this component
-import StoryPage from './components/StoryPage'; // You'll need to create this component
-import PodcastPage from './components/PodcastPage'; // You'll need to create this component
-import VideoPage from './components/VideoPage'; // You'll need to create this component
+import Dashboard from './components/Dashboard';
+import StoryPage from './components/StoryPage';
+import PodcastPage from './components/PodcastPage';
+import VideoPage from './components/VideoPage';
+import AuthSuccess from './components/AuthSuccess'; // Importez le nouveau composant
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
-
+  
   const handleOpenLogin = () => {
     setShowLogin(true);
     setShowSignup(false);
   };
-
+  
   const handleOpenSignup = () => {
     setShowSignup(true);
     setShowLogin(false);
   };
-
+  
   const handleCloseModals = () => {
     setShowLogin(false);
     setShowSignup(false);
   };
-
+  
   const handleSwitchToSignup = () => {
     setShowLogin(false);
     setShowSignup(true);
   };
-
+  
   const handleSwitchToLogin = () => {
     setShowSignup(false);
     setShowLogin(true);
   };
-
+  
   return (
     <Router>
       <div className="app">
         <Routes>
-          <Route 
-            path="/" 
+          <Route
+            path="/"
             element={
               <>
                 <HomePage onLogin={handleOpenLogin} onSignup={handleOpenSignup} />
                 {showLogin && (
-                  <Login 
-                    onClose={handleCloseModals} 
-                    onSwitchToSignup={handleSwitchToSignup} 
+                  <Login
+                    onClose={handleCloseModals}
+                    onSwitchToSignup={handleSwitchToSignup}
                   />
                 )}
                 {showSignup && (
-                  <Signup 
-                    onClose={handleCloseModals} 
-                    onSwitchToLogin={handleSwitchToLogin} 
+                  <Signup
+                    onClose={handleCloseModals}
+                    onSwitchToLogin={handleSwitchToLogin}
                   />
                 )}
               </>
-            } 
+            }
           />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -68,6 +69,7 @@ function App() {
           <Route path="/story" element={<StoryPage />} />
           <Route path="/podcast" element={<PodcastPage />} />
           <Route path="/video" element={<VideoPage />} />
+          <Route path="/auth-success" element={<AuthSuccess />} /> {/* Nouvelle route */}
         </Routes>
       </div>
     </Router>

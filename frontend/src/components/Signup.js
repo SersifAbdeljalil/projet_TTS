@@ -1,4 +1,3 @@
-// frontend/src/components/Signup.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/Signup.css';
@@ -90,7 +89,29 @@ function Signup({ onClose, onSwitchToLogin }) {
       navigate('/');
     }
   };
-  
+
+  const handleGoogleLogin = () => {
+    console.log("Google login clicked"); // Debug log
+    window.location.assign('http://localhost:5000/api/auth/google');
+    
+    // Alternative plus robuste :
+    // window.open(
+    //   'http://localhost:5000/api/auth/google',
+    //   '_blank',
+    //   'noopener,noreferrer'
+    // );
+  };
+
+  const handleFacebookLogin = () => {
+    window.location.href = 'http://localhost:5000/api/auth/facebook';
+  };
+
+  const handleTwitterLogin = () => {
+    // Implémentation à venir pour Twitter/X
+    console.log("Twitter login clicked");
+    // window.location.href = 'http://localhost:5000/api/auth/twitter';
+  };
+
   return (
     <div className="auth-modal">
       <div className="auth-container">
@@ -104,13 +125,13 @@ function Signup({ onClose, onSwitchToLogin }) {
         </div>
         
         <div className="social-buttons">
-          <button className="social-button">
+          <button className="social-button" onClick={handleGoogleLogin} type="button">
             <FaGoogle />
           </button>
-          <button className="social-button">
+          <button className="social-button" onClick={handleFacebookLogin} type="button">
             <FaFacebook />
           </button>
-          <button className="social-button">
+          <button className="social-button" onClick={handleTwitterLogin} type="button">
             <FaTwitter />
           </button>
         </div>
