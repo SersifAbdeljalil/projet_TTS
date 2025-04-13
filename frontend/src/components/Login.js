@@ -25,7 +25,7 @@ function Login({ onClose, onSwitchToSignup }) {
       
       if (data.success) {
         localStorage.setItem('token', data.token);
-        // Rediriger vers la page d'accueil ou le tableau de bord
+
         if (onClose) {
           onClose();
         } else {
