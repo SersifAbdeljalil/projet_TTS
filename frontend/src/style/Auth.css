@@ -1,0 +1,423 @@
+/* Auth.css - Styles optimisés pour TTS */
+
+.auth-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.auth-container {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #888;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  transition: background-color 0.2s;
+}
+
+.close-button:hover, .close-button:focus {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-header h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.auth-header p {
+  color: #666;
+  font-size: 1rem;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+  background: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1.2rem;
+}
+
+.social-button.google {
+  color: #DB4437;
+}
+
+.social-button.facebook {
+  color: #4267B2;
+}
+
+.social-button.twitter {
+  color: #1DA1F2;
+}
+
+.social-button:hover, .social-button:focus {
+  background-color: #f5f5f5;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+  color: #888;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid #e0e0e0;
+}
+
+.auth-divider span {
+  padding: 0 1rem;
+  font-size: 0.9rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.input-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  color: #aaa;
+  font-size: 1rem;
+}
+
+.input-with-icon {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.input-with-icon:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.toggle-password {
+  position: absolute;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+}
+
+.toggle-password:hover, .toggle-password:focus {
+  color: #333;
+}
+
+.password-strength {
+  height: 4px;
+  background-color: #f0f0f0;
+  border-radius: 2px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.password-strength-bar {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+
+.strength-weak {
+  width: 33%;
+  background-color: #ff4d4f;
+}
+
+.strength-medium {
+  width: 66%;
+  background-color: #faad14;
+}
+
+.strength-strong {
+  width: 100%;
+  background-color: #52c41a;
+}
+
+.password-rules {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.remember-me input[type="checkbox"] {
+  margin-right: 0.5rem;
+  width: 18px;
+  height: 18px;
+}
+
+.remember-me label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.buttons-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #357abf;
+}
+
+.btn-primary:disabled {
+  background-color: #a0c4e8;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: #f5f5f5;
+  color: #666;
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+  background-color: #e5e5e5;
+  color: #333;
+}
+
+.form-footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.form-footer p {
+  margin: 0.5rem 0;
+}
+
+.text-link {
+  color: #4a90e2;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.text-link:hover, .text-link:focus {
+  color: #357abf;
+  text-decoration: underline;
+}
+
+.error-message {
+  background-color: #fff2f0;
+  color: #ff4d4f;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border: 1px solid #ffccc7;
+  font-size: 0.9rem;
+}
+
+/* Classes d'accessibilité */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Styles de focus améliorés pour la navigation au clavier */
+:focus {
+  outline: 2px solid #4a90e2;
+  outline-offset: 2px;
+}
+
+/* Animation pour les changements d'état */
+.auth-container {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Améliorations spécifiques pour TTS */
+.tts-focus:focus {
+  outline: 3px solid #4a90e2;
+  outline-offset: 3px;
+}
+
+.tts-announce {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Augmenter le contraste pour meilleure lisibilité */
+.auth-header h2 {
+  color: #1a1a1a;
+}
+
+.form-group label {
+  color: #333;
+}
+
+/* Styles pour la lecture des erreurs par les lecteurs d'écran */
+[aria-live="assertive"], 
+[aria-live="polite"] {
+  border-left: 3px solid currentColor;
+  padding-left: 0.75rem;
+}
+
+/* Meilleure indication visuelle pour les champs obligatoires */
+[aria-required="true"] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Ccircle cx='4' cy='4' r='3' fill='%23d00'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem top 0.75rem;
+  background-size: 0.5rem;
+}
+
+/* Animation de progression pour indiquer le chargement */
+@keyframes dotPulse {
+  0% { content: '.'; }
+  33% { content: '..'; }
+  66% { content: '...'; }
+  100% { content: '.'; }
+}
+
+.btn-primary:disabled[aria-busy="true"]::after {
+  content: '.';
+  display: inline-block;
+  animation: dotPulse 1.5s infinite;
+  width: 1.5rem;
+  text-align: left;
+}
+
+/* Améliorer le contraste des messages d'erreur */
+.error-message {
+  background-color: #ffeaea;
+  color: #d32f2f;
+  border-color: #ffc4c4;
+  font-weight: 500;
+}
+
+/* Ajout d'une vibration subtile pour les erreurs (peuvent être annoncées par TTS) */
+@keyframes shakeError {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.error-message[aria-live="assertive"] {
+  animation: shakeError 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Style spécifique pour la navigation vocale */
+.voice-nav-active {
+  box-shadow: 0 0 0 3px #4caf50;
+}
+
+/* Améliorer l'accessibilité des liens */
+a:focus {
+  text-decoration: underline;
+  outline: 2px solid #4a90e2;
+  outline-offset: 2px;
+}
