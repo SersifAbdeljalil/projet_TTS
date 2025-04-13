@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/Login.css'; 
 import { FaEnvelope, FaLock, FaGoogle, FaFacebook, FaTwitter, FaTimes } from 'react-icons/fa';
@@ -18,16 +18,22 @@ function Login({ onClose, onSwitchToSignup }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
+        credentials: 'include', // Important pour les cookies
       });
       
       const data = await response.json();
       
       if (data.success) {
+        // Stocker le token dans localStorage
         localStorage.setItem('token', data.token);
-
+        
+        // Si l'utilisateur est connecté depuis la modal
         if (onClose) {
-          onClose();
+          onClose(); // Fermer la modal
+          // Rediriger vers le dashboard après avoir fermé la modal
+          setTimeout(() => navigate('/dashboard'), 100);
         } else {
+          // Redirection directe si on est sur la page /login
           navigate('/dashboard');
         }
       } else {
@@ -39,19 +45,30 @@ function Login({ onClose, onSwitchToSignup }) {
     }
   };
 
+  // Pour gérer les redirections après auth OAuth
+  useEffect(() => {
+    // Vérifier si l'utilisateur est déjà authentifié
+    const token = localStorage.getItem('token');
+    if (token) {
+      // Si modal, fermer puis rediriger
+      if (onClose) {
+        onClose();
+        setTimeout(() => navigate('/dashboard'), 100);
+      } else {
+        navigate('/dashboard');
+      }
+    }
+  }, [navigate, onClose]);
+
   const handleGoogleLogin = () => {
-    console.log("Google login clicked"); // Debug log
+    console.log("Google login clicked");
+    // Stocker l'URL de redirection souhaitée
+    localStorage.setItem('redirectAfterAuth', '/dashboard');
     window.location.assign('http://localhost:5000/api/auth/google');
-    
-    // Alternative plus robuste :
-    // window.open(
-    //   'http://localhost:5000/api/auth/google',
-    //   '_blank',
-    //   'noopener,noreferrer'
-    // );
   };
 
   const handleFacebookLogin = () => {
+    localStorage.setItem('redirectAfterAuth', '/dashboard');
     window.location.href = 'http://localhost:5000/api/auth/facebook';
   };
 

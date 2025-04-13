@@ -14,11 +14,10 @@ router.get('/google',
 router.get('/google/callback', 
   passport.authenticate('google', { 
     failureRedirect: '/login',
-    successRedirect: process.env.CLIENT_URL || 'http://localhost:3000',
+    successRedirect: process.env.CLIENT_URL || 'http://localhost:3000/dashboard',
     failureFlash: true // Active les messages flash pour les erreurs
   })
 );
-
 // Route pour l'authentification Facebook
 router.get('/facebook',
   passport.authenticate('facebook', { 
