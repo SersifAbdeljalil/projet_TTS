@@ -444,22 +444,10 @@ function HomePage({ onLogin, onSignup }) {
       {/* Contenu principal */}
       <div className={`main-content ${(showDrawer && isAuthenticated) ? 'with-drawer' : 'full-width'}`}>
         <div className="content-wrapper">
-          {/* En-tête commun */}
+          {/* En-tête commun - BOUTONS SUPPRIMÉS */}
           <div className="app-header">
             <h1 className="app-title">Générateur de contenu audio et vidéo IA</h1>
             <p className="app-subtitle">Transformez vos textes en contenus médias professionnels</p>
-            
-            {/* Afficher les boutons de connexion dans le header si non authentifié */}
-            {!isAuthenticated && (
-              <div className="header-auth-buttons">
-                <button className="header-login-button" onClick={navigateToLogin}>
-                  <FiLogIn /> Se connecter
-                </button>
-                <button className="header-signup-button" onClick={navigateToSignup}>
-                  <FiUserPlus /> S'inscrire
-                </button>
-              </div>
-            )}
           </div>
           
           {/* Contenu différent selon l'état d'authentification */}

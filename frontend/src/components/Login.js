@@ -36,11 +36,6 @@ function Login({ onClose, onSwitchToSignup }) {
       if (data.success) {
         localStorage.setItem('token', data.token);
         
-        // Annonce vocale pour confirmation
-        const successMessage = 'Connexion réussie! Redirection vers le tableau de bord.';
-        // Si disponible dans votre API TTS:
-        // window.speechSynthesis.speak(new SpeechSynthesisUtterance(successMessage));
-        
         if (onClose) {
           onClose();
           setTimeout(() => navigate('/dashboard'), 100);
@@ -49,10 +44,6 @@ function Login({ onClose, onSwitchToSignup }) {
         }
       } else {
         setError(data.message || 'Identifiants invalides');
-        
-        // Annonce vocale pour l'erreur
-        // Si disponible dans votre API TTS:
-        // window.speechSynthesis.speak(new SpeechSynthesisUtterance(data.message || 'Identifiants invalides'));
       }
     } catch (error) {
       console.error('Erreur de connexion:', error);
@@ -65,28 +56,67 @@ function Login({ onClose, onSwitchToSignup }) {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      if (onClose) {
-        onClose();
-        setTimeout(() => navigate('/dashboard'), 100);
-      } else {
-        navigate('/dashboard');
-      }
+      // Vérifier la validité du token
+      fetch('http://localhost:5000/api/auth/verify', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          // Token valide, rediriger vers le tableau de bord
+          if (onClose) {
+            onClose();
+            setTimeout(() => navigate('/dashboard'), 100);
+          } else {
+            navigate('/dashboard');
+          }
+        } else {
+          // Token invalide, le supprimer
+          localStorage.removeItem('token');
+        }
+      })
+      .catch(err => {
+        console.error('Erreur de vérification du token:', err);
+        localStorage.removeItem('token');
+      });
     }
   }, [navigate, onClose]);
 
   const handleGoogleLogin = () => {
+    // Stocker l'information de redirection dans localStorage
     localStorage.setItem('redirectAfterAuth', '/dashboard');
-    window.location.assign('http://localhost:5000/api/auth/google');
+    
+    // Afficher l'indicateur de chargement
+    setIsLoading(true);
+    
+    // Rediriger vers l'endpoint d'authentification Google
+    setTimeout(() => {
+      window.location.assign('http://localhost:5000/api/auth/google');
+    }, 500);
   };
 
   const handleFacebookLogin = () => {
+    // Stocker l'information de redirection dans localStorage
     localStorage.setItem('redirectAfterAuth', '/dashboard');
-    window.location.href = 'http://localhost:5000/api/auth/facebook';
+    
+    // Afficher l'indicateur de chargement
+    setIsLoading(true);
+    
+    // Rediriger vers l'endpoint d'authentification Facebook
+    setTimeout(() => {
+      window.location.href = 'http://localhost:5000/api/auth/facebook';
+    }, 500);
   };
 
   const handleTwitterLogin = () => {
-    // Implémentation à venir
-    console.log("Twitter login clicked");
+    // Afficher une alerte visuelle
+    setError("L'authentification via Twitter n'est pas encore disponible. Veuillez utiliser Google ou Facebook.");
+    
+    // Alternative: rediriger vers la documentation
+    // window.location.href = 'http://localhost:5000/api/auth/twitter';
   };
 
   const handleSwitchToSignup = (e) => {
@@ -130,6 +160,7 @@ function Login({ onClose, onSwitchToSignup }) {
             type="button"
             aria-label="Se connecter avec Google"
             title="Se connecter avec Google"
+            disabled={isLoading}
           >
             <FaGoogle />
             <span className="sr-only">Google</span>
@@ -140,6 +171,7 @@ function Login({ onClose, onSwitchToSignup }) {
             type="button"
             aria-label="Se connecter avec Facebook"
             title="Se connecter avec Facebook"
+            disabled={isLoading}
           >
             <FaFacebook />
             <span className="sr-only">Facebook</span>
@@ -150,6 +182,7 @@ function Login({ onClose, onSwitchToSignup }) {
             onClick={handleTwitterLogin}
             aria-label="Se connecter avec Twitter"
             title="Se connecter avec Twitter"
+            disabled={isLoading}
           >
             <FaTwitter />
             <span className="sr-only">Twitter</span>
@@ -181,6 +214,7 @@ function Login({ onClose, onSwitchToSignup }) {
                 required
                 aria-required="true"
                 autoComplete="email"
+                disabled={isLoading}
               />
             </div>
           </div>
@@ -199,6 +233,7 @@ function Login({ onClose, onSwitchToSignup }) {
                 required
                 aria-required="true"
                 autoComplete="current-password"
+                disabled={isLoading}
               />
               <button 
                 type="button" 
@@ -206,6 +241,7 @@ function Login({ onClose, onSwitchToSignup }) {
                 onClick={togglePasswordVisibility}
                 aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
                 title={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                disabled={isLoading}
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
@@ -218,6 +254,7 @@ function Login({ onClose, onSwitchToSignup }) {
               id="remember-me"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
+              disabled={isLoading}
             />
             <label htmlFor="remember-me">Se souvenir de moi</label>
           </div>
@@ -235,10 +272,11 @@ function Login({ onClose, onSwitchToSignup }) {
               type="button" 
               className="btn btn-secondary" 
               onClick={handleClose}
+              disabled={isLoading}
             >
               Annuler
             </button>
-          </div>
+            </div>
         </form>
         
         <div className="form-footer">

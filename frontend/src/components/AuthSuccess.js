@@ -10,15 +10,6 @@ function AuthSuccess() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Fonction pour annoncer les messages via TTS
-    const speakMessage = (text) => {
-      if (window.speechSynthesis) {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'fr-FR';
-        window.speechSynthesis.speak(utterance);
-      }
-    };
-
     const processAuthentication = async () => {
       try {
         // Animation de progression
@@ -29,8 +20,7 @@ function AuthSuccess() {
           });
         }, 300);
 
-        // Annoncer le début du processus
-        speakMessage("Authentification réussie. Récupération de vos informations...");
+        console.log("Récupération des données utilisateur...");
         
         // Récupérer les données utilisateur depuis le backend
         const response = await fetch('http://localhost:5000/api/auth/user', {
@@ -41,11 +31,14 @@ function AuthSuccess() {
           },
         });
 
+        console.log("Réponse reçue:", response.status);
+        
         if (!response.ok) {
           throw new Error(`Erreur HTTP ${response.status}: ${response.statusText}`);
         }
 
         const data = await response.json();
+        console.log("Données reçues:", data);
         
         if (!data.success) {
           throw new Error(data.message || "Erreur lors de la récupération des données utilisateur");
@@ -54,6 +47,7 @@ function AuthSuccess() {
         // Stocker le token JWT
         if (data.token) {
           localStorage.setItem('token', data.token);
+          console.log("Token stocké dans localStorage");
           
           // Stocker les informations utilisateur si nécessaire
           if (data.user) {
@@ -62,11 +56,11 @@ function AuthSuccess() {
               name: data.user.name,
               email: data.user.email
             }));
+            console.log("Données utilisateur stockées dans localStorage");
           }
           
-          // Annoncer que l'authentification est réussie
+          // Mettre à jour le message
           setMessage("Authentification réussie! Redirection vers le tableau de bord...");
-          speakMessage("Authentification réussie! Redirection vers le tableau de bord...");
           
           // Progresser à 100%
           clearInterval(progressInterval);
@@ -76,6 +70,8 @@ function AuthSuccess() {
           const redirectPath = localStorage.getItem('redirectAfterAuth') || '/dashboard';
           localStorage.removeItem('redirectAfterAuth'); // Nettoyer après usage
           
+          console.log("Redirection vers:", redirectPath);
+          
           // Rediriger vers le dashboard ou la page demandée
           setTimeout(() => navigate(redirectPath), 1500);
         } else {
@@ -84,9 +80,6 @@ function AuthSuccess() {
       } catch (error) {
         console.error("Erreur d'authentification:", error);
         setError(error.message || "Erreur lors de l'authentification");
-        
-        // Annoncer l'erreur
-        speakMessage("Erreur lors de l'authentification. Veuillez réessayer.");
         
         // Rediriger vers la page de connexion en cas d'erreur
         setTimeout(() => navigate('/login'), 3000);
